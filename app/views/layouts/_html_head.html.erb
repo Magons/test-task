@@ -1,7 +1,7 @@
 <head>
   <title><%= page_title(yield(:title)) %></title>
   <%= render 'layouts/rollbar_js' if ENV['ROLLBAR_POST_CLIENT_ITEM_TOKEN'] %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_pack_tag 'application' %>
   <%= stylesheet_pack_tag 'application' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

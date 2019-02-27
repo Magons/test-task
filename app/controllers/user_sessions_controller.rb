@@ -2,6 +2,7 @@
 
 # Overrides for Device's SessionsController
 class UserSessionsController < Devise::SessionsController
+  skip_before_action :verify_authenticity_token, only: :create
 
   respond_to :js
 

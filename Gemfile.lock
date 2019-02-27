@@ -114,7 +114,6 @@ GEM
     foreman (0.84.0)
       thor (~> 0.19.1)
     formatador (0.2.5)
-    geocoder (1.4.4)
     gettext (3.1.9)
       locale (>= 2.0.5)
       text (>= 1.3.0)
@@ -162,18 +161,6 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
     json (1.8.6)
-    kaminari (1.0.1)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.0.1)
-      kaminari-activerecord (= 1.0.1)
-      kaminari-core (= 1.0.1)
-    kaminari-actionview (1.0.1)
-      actionview
-      kaminari-core (= 1.0.1)
-    kaminari-activerecord (1.0.1)
-      activerecord
-      kaminari-core (= 1.0.1)
-    kaminari-core (1.0.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -381,7 +368,6 @@ DEPENDENCIES
   factory_girl_rails (~> 4.5.0)
   font-awesome-rails (~> 4.5, >= 4.5.0.1)
   foreman
-  geocoder (~> 1.2, >= 1.2.11)
   gettext (~> 3.1.6)
   gettext_i18n_rails (~> 1.2.3)
   guard-brakeman
@@ -392,7 +378,6 @@ DEPENDENCIES
   guard-shell
   inline_svg
   jbuilder (~> 2.0)
-  kaminari
   parallel_tests
   pg
   poltergeist
@@ -422,4 +407,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.1
+   2.0.1
