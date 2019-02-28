@@ -19,11 +19,11 @@ export default class QuestionsComponent extends React.Component {
       const id = 'answerChoice-' + question.id + '-' + index
       const name = 'question-' + question.id
       return (
-        <div key={index}>
+        <div key={index} className="form-group answers">
           <input type="radio" id={id} name={name}
             data-questionId={question.id} value={answer}
             onChange={this.props.onAnswerChange} />
-          <label for={id}>{answer}</label>
+          <label className="form-check-label" htmlFor={id}>{answer}</label>
         </div>
       )
     })

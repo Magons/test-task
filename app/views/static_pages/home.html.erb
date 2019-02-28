@@ -3,8 +3,10 @@
 <% icon = user_signed_in? ? "home" : nil %>
 <% provide(:icon, icon) %>
 
-<% if user_signed_in? %>
+<% if user_signed_in? && current_user.poll? %>
   <%= render "static_pages/overview" %>
+<% elsif user_signed_in? %>
+  <%= render "static_pages/poll" %>
 <% else %>
   <%= render 'shared/home' %>
 <% end %>

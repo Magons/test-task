@@ -1,0 +1,5 @@
+<%= render 'user_expired_modal' if @is_expired %>
+<div id="here"></div>
+<script>
+  QuestionsComponent.injectToPage('#here', <%= { questions: @questions }.to_json.html_safe %>)
+</script>

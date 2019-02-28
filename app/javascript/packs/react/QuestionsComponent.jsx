@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 import QuestionComponent from './QuestionComponent'
 
 export default class QuestionsComponent extends React.Component {
@@ -15,12 +16,26 @@ export default class QuestionsComponent extends React.Component {
     this._prev = this._prev.bind(this);
     this.onAnswerChange = this.onAnswerChange.bind(this);
     this.validateAnswer = this.validateAnswer.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   };
 
   onAnswerChange(e) {
     let answers = this.state.answers
-    answers[e.target.dataset.questionid] = e.target.value
+    const questionId = e.target.dataset.questionid
+    answers[questionId] = { question_id: questionId, body: e.target.value }
     this.setState({ answers })
+  }
+
+  handleSave() {
+    axios.post('/api/v1/answers', {
+      answers: this.state.answers
+    })
+      .then(function (response) {
+        window.location.href = '/'
+      })
+      .catch(function (error) {
+        growl('Alert', 'Something went wrong.')
+      });
   }
 
   validateAnswer() {
@@ -39,8 +54,9 @@ export default class QuestionsComponent extends React.Component {
     if (this.validateAnswer()) {
       let { currentStep } = this.state
       let maxStep = this.props.questions.length - 1 // "- 1" because we start from 0
-      // Make sure currentStep is set to something reasonable
-      if (currentStep >= (maxStep - 1)) {
+      if (currentStep == maxStep) {
+        this.handleSave()
+      } else if (currentStep >= (maxStep - 1)) { // Make sure currentStep is set to something reasonable
         currentStep = maxStep;
       } else {
         currentStep = currentStep + 1;
@@ -90,8 +106,10 @@ export default class QuestionsComponent extends React.Component {
         <form>
           {questionsBlock}
         </form>
-        <button className="btn" onClick={this._prev}>Prev</button>
-        <button className="btn" onClick={this._next}>{lastStep ? 'Save' : 'Next' }</button>
+        <div className="buttons">
+          <button className="btn btn-primary" onClick={this._prev}>Prev</button>
+          <button className="btn btn-primary" onClick={this._next}>{lastStep ? 'Save' : 'Next'}</button>
+        </div>
       </div>
     )
   }
