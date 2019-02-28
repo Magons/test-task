@@ -25,6 +25,12 @@ Rails.application.routes.draw do
   get 'en/privacy-policy' => 'static_pages#privacy_policy', as: :privacy_policy
   get 'en/terms-of-service' => 'static_pages#terms_of_service', as: :terms_of_service
 
+  namespace :api do
+    namespace :v1 do
+      resources :answers, only: [:create]
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

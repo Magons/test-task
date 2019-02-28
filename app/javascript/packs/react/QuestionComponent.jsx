@@ -17,11 +17,13 @@ export default class QuestionsComponent extends React.Component {
     const { question, currentStep, step } = this.props;
     const answers = question.answer_choices.map((answer, index) => {
       const id = 'answerChoice-' + question.id + '-' + index
-      const name = 'answer' + question.id
+      const name = 'question-' + question.id
       return (
         <div key={index}>
-          <input type="radio" id={id} name={name} value={answer} />
-          <label for="id">{answer}</label>
+          <input type="radio" id={id} name={name}
+            data-questionId={question.id} value={answer}
+            onChange={this.props.onAnswerChange} />
+          <label for={id}>{answer}</label>
         </div>
       )
     })

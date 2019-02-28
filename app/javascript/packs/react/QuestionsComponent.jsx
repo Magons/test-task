@@ -8,25 +8,48 @@ export default class QuestionsComponent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentStep: 0
+      currentStep: 0,
+      answers: {}
     }
     this._next = this._next.bind(this);
     this._prev = this._prev.bind(this);
+    this.onAnswerChange = this.onAnswerChange.bind(this);
+    this.validateAnswer = this.validateAnswer.bind(this);
+  };
+
+  onAnswerChange(e) {
+    let answers = this.state.answers
+    answers[e.target.dataset.questionid] = e.target.value
+    this.setState({ answers })
+  }
+
+  validateAnswer() {
+    const questions = this.props.questions
+    let { currentStep, answers } = this.state
+    const question = questions[currentStep]
+    if (answers[question.id]) {
+      return true
+    } else {
+      growl('Alert', 'Please choose answer!')
+      return false
+    }
   }
 
   _next() {
-    let currentStep = this.state.currentStep;
-    let maxStep = this.props.questions.length - 1 // "- 1" because we start from 0
-    // Make sure currentStep is set to something reasonable
-    if (currentStep >= (maxStep - 1)) {
-      currentStep = maxStep;
-    } else {
-      currentStep = currentStep + 1;
-    }
+    if (this.validateAnswer()) {
+      let { currentStep } = this.state
+      let maxStep = this.props.questions.length - 1 // "- 1" because we start from 0
+      // Make sure currentStep is set to something reasonable
+      if (currentStep >= (maxStep - 1)) {
+        currentStep = maxStep;
+      } else {
+        currentStep = currentStep + 1;
+      }
 
-    this.setState({
-      currentStep: currentStep
-    });
+      this.setState({
+        currentStep: currentStep
+      });
+    }
   }
 
   _prev() {
@@ -52,14 +75,21 @@ export default class QuestionsComponent extends React.Component {
     const questions = this.props.questions;
     const currentStep = this.state.currentStep
     const questionsBlock = questions.map((question, index) => {
-      return <QuestionComponent key={question.id} question={question} currentStep={currentStep} step={index}/>
+      return <QuestionComponent
+        key={question.id}
+        question={question}
+        currentStep={currentStep}
+        step={index}
+        onAnswerChange={this.onAnswerChange}/>
     })
     const lastStep = currentStep == (questions.length - 1)
 
     return (
       <div>
         <p>Please give answers on folowing questions:</p>
-        {questionsBlock}
+        <form>
+          {questionsBlock}
+        </form>
         <button className="btn" onClick={this._prev}>Prev</button>
         <button className="btn" onClick={this._next}>{lastStep ? 'Save' : 'Next' }</button>
       </div>
