@@ -102,7 +102,7 @@ export default class QuestionsComponent extends React.Component {
 
     return (
       <div>
-        <p>Please give answers on folowing questions:</p>
+        <p>Please give answers on folowing questions ({currentStep + 1}/{questions.length}):</p>
         <form>
           {questionsBlock}
         </form>
