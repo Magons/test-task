@@ -5,7 +5,7 @@ task :generate_questions => :environment do
       answer_choices: ['red', 'green', 'blue']
     },
     {
-      body: 'What data base do your prefer?',
+      body: 'What database do your prefer?',
       answer_choices: ['Postgresql', 'MySql', 'Mongo']
     },
     {

@@ -1,5 +1,6 @@
 <%= render 'user_expired_modal' if @is_expired %>
 <div id="here"></div>
 <script>
-  HelloComponent.injectToPage('#here', <%= {email: current_user.email}.to_json.html_safe %>)
+  QuestionsComponent.injectToPage('#here', <%= { questions: @questions }.to_json.html_safe %>)
+  // HelloComponent.injectToPage('#here', <%= {email: current_user.email}.to_json.html_safe %>)
 </script>

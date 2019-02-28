@@ -9,6 +9,7 @@ class StaticPagesController < ApplicationController
   def home
     if current_user
     end
+    @questions = Question.all
   end
 
   def my_profile
